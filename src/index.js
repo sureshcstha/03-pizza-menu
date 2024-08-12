@@ -50,7 +50,6 @@ const pizzaData = [
 function App() {
   return (
     <div className="container">
-      <h1>Hello React!</h1>
       <Header />
       <Menu />
       <Footer />
@@ -71,11 +70,27 @@ function Menu() {
     <main>
       <div className="menu">
         <h2>Our Menu</h2>
-        <Pizza />
-        <Pizza />
-        <Pizza />
+
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
       </div>
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>${props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
@@ -89,16 +104,6 @@ function Footer() {
     <footer className="footer">
       {new Date().toLocaleTimeString()} We're currently open.
     </footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
   );
 }
 
